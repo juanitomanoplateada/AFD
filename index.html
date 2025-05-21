@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>📘 Simulación AFD de Propuesta de Grado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Título principal de la aplicación -->
+      <header>
+        <h1>📘 Simulación AFD de Propuesta de Grado</h1>
+      </header>
+
+      <div class="grid-layout">
+        <!-- Columna izquierda: Estado y diagrama -->
+        <aside class="left-column">
+          <!-- Sección: Estado actual y transiciones -->
+          <section class="status-and-transitions">
+            <!-- Tarjeta de estado actual -->
+            <div class="card status-card">
+              <h2>Estado Actual</h2>
+              <p><span id="currentState">inicio</span></p>
+            </div>
+
+            <!-- Tarjeta de transiciones posibles -->
+            <div class="card transition-card">
+              <h2>Transiciones Posibles</h2>
+              <ul id="transitionList"></ul>
+            </div>
+          </section>
+
+          <!-- Sección: Visualización del AFD -->
+          <section class="afd-visualizer">
+            <h2>Diagrama del AFD</h2>
+            <svg id="afdSvg" width="1200" height="500"></svg>
+          </section>
+        </aside>
+
+        <!-- Columna derecha: Acciones y historial -->
+        <main class="right-column">
+          <!-- Sección: Panel de acciones disponibles -->
+          <section class="actions-panel" id="actionsPanel">
+            <h2>Acciones Disponibles</h2>
+            <!-- Botones generados dinámicamente aquí -->
+          </section>
+
+          <!-- Sección: Historial de transiciones -->
+          <section class="history-panel">
+            <h2>Historial de Transiciones</h2>
+            <ul id="historyList"></ul>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,231 @@
+/* ============================================================
+   Estilos para la Simulación AFD de Propuesta de Grado
+   ============================================================ */
+
+/* --------------------------------
+   Variables de color y tipografía
+   -------------------------------- */
+:root {
+  --bg-page: #f0f2f5;
+  --bg-container: #ffffff;
+  --text-primary: #2c3e50;
+  --primary: #1976d2;
+  --primary-dark: #125ea6;
+  --success: #4caf50;
+  --success-dark: #2e7d32;
+  --info-light: #e3f2fd;
+  --success-light: #f1f8e9;
+  --border-light: #ddd;
+  --border-lighter: #ccc;
+  --font-family: "Inter", sans-serif;
+}
+
+/* ------------------------
+   Reset y estilo base
+   ------------------------ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 2rem;
+}
+
+a,
+button {
+  font-family: inherit;
+}
+
+/* ------------------------
+   Contenedor Principal
+   ------------------------ */
+.container {
+  max-width: 1800px;
+  height: 93vh;
+  margin: 0 auto;
+  background: var(--bg-container);
+  padding: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+header h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+/* ------------------------
+   Grid Layout General
+   ------------------------ */
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 0.3fr;
+  gap: 2rem;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ------------------------
+   Columna Izquierda
+   ------------------------ */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+
+/* Estado actual y transiciones */
+.status-and-transitions {
+  display: flex;
+  gap: 2rem;
+}
+
+.card {
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.status-card {
+  flex: 1;
+  background: var(--info-light);
+  border-left: 6px solid var(--primary);
+}
+
+.transition-card {
+  flex: 1;
+  background: var(--success-light);
+  border-left: 6px solid var(--success-dark);
+}
+
+.status-card p,
+.transition-card ul {
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+}
+
+/* Visualizador SVG */
+.afd-visualizer {
+  flex: 1;
+  background: var(--bg-container);
+  border: 2px solid var(--border-light);
+  border-radius: 10px;
+  padding: 1rem;
+  overflow: auto;
+}
+
+/* SVG del AFD */
+svg#afdSvg {
+  width: 100%;
+  height: 95%;
+  display: block;
+}
+
+/* ----------------------------------
+   Estados y animación de nodo activo
+   ---------------------------------- */
+.afd-state {
+  fill: #fff;
+  stroke: #333;
+  stroke-width: 2;
+  transition: fill 0.3s ease;
+}
+
+.afd-active {
+  fill: var(--success) !important;
+  stroke: var(--success-dark) !important;
+  stroke-width: 3 !important;
+  animation: pulseGlow 1.5s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px var(--success));
+  }
+  50% {
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 10px var(--success));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px var(--success));
+  }
+}
+
+/* ------------------------
+   Columna Derecha
+   ------------------------ */
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  overflow-y: auto;
+}
+
+/* Panel de acciones disponibles */
+.actions-panel {
+  background: var(--bg-container);
+  border: 2px solid var(--border-light);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.actions-panel h2 {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.actions-panel button {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.75rem;
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.actions-panel button:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Historial de transiciones */
+.history-panel {
+  background: #f4f6f8;
+  border: 2px solid var(--border-lighter);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.history-panel h2 {
+  margin-bottom: 1rem;
+}
+
+.history-panel ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+/* ------------------------
+   Responsive y ajustes menores
+   ------------------------ */
+@media (max-width: 1024px) {
+  .grid-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}
