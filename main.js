@@ -16,14 +16,14 @@ let currentState = initialState;
 /** Coordenadas (x, y) de cada estado para el diagrama SVG */
 const afdStates = {
   inicio: { x: 100, y: 350 },
-  elaborando_propuesta: { x: 350, y: 350 },
+  elaborando_propuesta: { x: 500, y: 350 },
   enviando_propuesta: { x: 100, y: 100 },
-  revisando_tutor: { x: 600, y: 100 },
+  revisando_tutor: { x: 500, y: 100 },
   revisando_comite: { x: 850, y: 100 },
-  asignando_jurado: { x: 1100, y: 100 },
-  revisando_jurado: { x: 1100, y: 350 },
-  generando_carta: { x: 1100, y: 550 },
-  cancelando_propuesta: { x: 600, y: 550 },
+  asignando_jurado: { x: 1170, y: 100 },
+  revisando_jurado: { x: 1170, y: 350 },
+  generando_carta: { x: 1170, y: 570 },
+  cancelando_propuesta: { x: 500, y: 570 },
 };
 
 /** Lista de transiciones con actor, acción y descripción */
@@ -32,61 +32,61 @@ const afdTransitions = [
     from: "inicio",
     to: "elaborando_propuesta",
     actor: "estudiante",
-    descripcion: "El estudiante decide iniciar el proceso",
+    descripcion: "[El estudiante decide iniciar el proceso]",
   },
   {
     from: "elaborando_propuesta",
     to: "enviando_propuesta",
     actor: "estudiante",
-    descripcion: "El estudiante envía la propuesta al tutor",
+    descripcion: "[El estudiante envía la propuesta]",
   },
   {
     from: "elaborando_propuesta",
     to: "cancelando_propuesta",
     actor: "estudiante",
-    descripcion: "El estudiante cancela la propuesta",
+    descripcion: "[El estudiante cancela la propuesta]",
   },
   {
     from: "enviando_propuesta",
     to: "revisando_tutor",
     actor: "tutor",
-    descripcion: "El tutor recibe la propuesta para revisión",
+    descripcion: "[El tutor recibe la propuesta para revisión]",
   },
   {
     from: "revisando_tutor",
     to: "revisando_comite",
     actor: "tutor",
-    descripcion: "El tutor aprueba la propuesta",
+    descripcion: "[El tutor aprueba la propuesta]",
   },
   {
     from: "revisando_tutor",
     to: "elaborando_propuesta",
     actor: "tutor",
-    descripcion: "El tutor rechaza y solicita reformulación",
+    descripcion: "[El tutor rechaza y pide reformular]",
   },
   {
     from: "revisando_comite",
     to: "asignando_jurado",
     actor: "comité",
-    descripcion: "El comité asigna jurado",
+    descripcion: "[El comité asigna jurado]",
   },
   {
     from: "asignando_jurado",
     to: "revisando_jurado",
     actor: "comité",
-    descripcion: "El jurado es asignado y recibe la propuesta",
+    descripcion: "[El jurado es asignado y recibe la propuesta]",
   },
   {
     from: "revisando_jurado",
     to: "generando_carta",
     actor: "jurado",
-    descripcion: "El jurado aprueba la propuesta final",
+    descripcion: "[El jurado aprueba la propuesta final]",
   },
   {
     from: "revisando_jurado",
     to: "elaborando_propuesta",
     actor: "jurado",
-    descripcion: "El jurado rechaza y solicita reformulación",
+    descripcion: "[El jurado rechaza y solicita reformulación]",
   },
 ];
 
@@ -120,7 +120,7 @@ function drawAFD(activeState) {
   svg.appendChild(defs);
 
   // Dibujar transiciones con flechas punteadas
-  afdTransitions.forEach(({ from, to }) => {
+  afdTransitions.forEach(({ from, to, actor, descripcion }) => {
     const start = afdStates[from];
     const end = afdStates[to];
     const angle = Math.atan2(end.y - start.y, end.x - start.x);
@@ -137,6 +137,19 @@ function drawAFD(activeState) {
     path.setAttribute("stroke-dasharray", "5,5");
     path.setAttribute("marker-end", "url(#arrowhead)");
     svg.appendChild(path);
+
+    // Dibujar etiqueta de transición
+    const midX = (startX + endX) / 2;
+    const midY = (startY + endY) / 2;
+
+    const label = document.createElementNS(SVG_NS, "text");
+    label.setAttribute("x", midX);
+    label.setAttribute("y", midY - 10);
+    label.setAttribute("text-anchor", "middle");
+    label.setAttribute("font-size", "12px");
+    label.setAttribute("fill", "#555");
+    label.textContent = `${descripcion}`;
+    svg.appendChild(label);
   });
 
   // Dibujar nodos
