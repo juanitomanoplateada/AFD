@@ -19,7 +19,7 @@ const afdStates = {
   elaborando_propuesta: { x: 500, y: 350 },
   enviando_propuesta: { x: 100, y: 100 },
   revisando_tutor: { x: 500, y: 100 },
-  revisando_comité: { x: 850, y: 100 },
+  revisando_comite: { x: 850, y: 100 },
   asignando_jurado: { x: 1170, y: 100 },
   revisando_jurado: { x: 1170, y: 350 },
   generando_carta: { x: 1170, y: 570 },
@@ -54,7 +54,7 @@ const afdTransitions = [
   },
   {
     from: "revisando_tutor",
-    to: "revisando_comité",
+    to: "revisando_comite",
     actor: "tutor",
     descripcion: "[El tutor aprueba la propuesta]",
   },
